@@ -59,8 +59,16 @@ plt.show()
 # TODO -- experiment with changing the values of beta and omega
 # to understand what they do.  Try to make a line
 # that crosses the y-axis at y=10 and the x-axis at x=5
+beta = 10.0; omega = -2.0
 
-"""Now let's investigate a 2D linear function"""
+y = linear_function_1D(x,beta,omega)
+
+# Plot this function
+fig, ax = plt.subplots()
+ax.plot(x,y,'r-')
+ax.set_ylim([0,10]);ax.set_xlim([0,10])
+ax.set_xlabel('x'); ax.set_ylabel('y')
+plt.show
 
 # Code to draw 2D function -- read it so you know what is going on, but you don't have to change it
 def draw_2D_function(x1_mesh, x2_mesh, y):
@@ -76,7 +84,7 @@ def draw_2D_function(x1_mesh, x2_mesh, y):
 # Define a linear function with two inputs, x1 and x2
 def linear_function_2D(x1,x2,beta,omega1,omega2):
   # TODO -- replace the code line below with formula for 2D linear equation
-  y = x1
+  y = beta + omega1 * x1 + omega2 * x2
 
   return y
 
@@ -101,15 +109,21 @@ draw_2D_function(x1,x2,y)
 # TODO
 # Predict what this plot will look like if you set omega_1 to zero
 # Change the code and see if you are right.
-
+beta = 0.0; omega1 = 0.0; omega2 = -0.5
+y  = linear_function_2D(x1,x2,beta, omega1, omega2)
+draw_2D_function(x1,x2,y)
 # TODO
 # Predict what this plot will look like if you set omega_2 to zero
 # Change the code and see if you are right.
-
+beta = 0.0; omega1 = 1.0; omega2 = 0
+y  = linear_function_2D(x1,x2,beta, omega1, omega2)
+draw_2D_function(x1,x2,y)
 # TODO
 # Predict what this plot will look like if you set beta to -5
 # Change the code and see if you are correct
-
+beta = -5.0; omega1 = 1.0; omega2 = -0.5
+y  = linear_function_2D(x1,x2,beta, omega1, omega2)
+draw_2D_function(x1,x2,y)
 """Often we will want to compute many linear functions at the same time.  For example, we might have three inputs, $x_1$, $x_2$, and $x_3$ and want to compute two linear functions giving $y_1$ and $y_2$. Of course, we could do this by just running each equation separately,<br><br>
 
 \begin{align}y_1 &=& \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
@@ -135,7 +149,7 @@ for short.  Here, lowercase bold symbols are used for vectors.  Upper case bold 
 # Define a linear function with three inputs, x1, x2, and x_3
 def linear_function_3D(x1,x2,x3,beta,omega1,omega2,omega3):
   # TODO -- replace the code below with formula for a single 3D linear equation
-  y = x1
+  y = beta + omega1*x1 + omega2*x2 + omega3*x3
 
   return y
 
@@ -193,12 +207,20 @@ plt.show()
 
 """# Questions
 
-1. What is $\exp[0]$?  
-2. What is $\exp[1]$?
-3. What is $\exp[-\infty]$?
-4. What is $\exp[+\infty]$?
+1. What is $\exp[0]$?  1.0 
+2. What is $\exp[1]$? 2.718281828459045
+3. What is $\exp[-\infty]$?infty
+4. What is $\exp[+\infty]$? 0.0
 5. A function is convex if we can draw a straight line between any two points on the function, and the line lies above the function everywhere between these two points. Similarly, a function is concave if a straight line between any two points lies below the function everywhere between these two points.  Is the exponential function convex or concave or neither?
+y1 = np.exp(0)
+y2 = np.exp(1)
+y3 = np.exp(float('inf'))
+y4 = np.exp((-1.0)*float('inf'))
 
+print("exp[0]=",y1)
+print("exp[1]=",y2)
+print("exp[inf]=",y3)
+print("exp[-inf]=",y4)
 Now let's consider the logarithm function $y=\log[x]$. Throughout the book we always use natural (base $e$) logarithms. The log function maps non-negative numbers $[0,\infty]$ to real numbers $[-\infty,\infty]$.  It is the inverse of the exponential function.  So when we compute $\log[x]$ we are really asking "What is the number $y$ so that $e^y=x$?"
 """
 
@@ -217,12 +239,24 @@ plt.show()
 
 """# Questions
 
-1. What is $\log[0]$?  
-2. What is $\log[1]$?
-3. What is $\log[e]$?
-4. What is $\log[\exp[3]]$?
-5. What is $\exp[\log[4]]$?
-6. What is $\log[-1]$?
+1. What is $\log[0]$?   -infinite (limit)
+2. What is $\log[1]$? 0
+3. What is $\log[e]$? 1
+4. What is $\log[\exp[3]]$? 3
+5. What is $\exp[\log[4]]$? 4
+6. What is $\log[-1]$?not defined
 7. Is the logarithm function concave or convex?
+y1 = np.log(0)
+y2 = np.log(1)
+y3 = np.log(np.exp(1))
+y4 = np.log(np.exp(3))
+y5 = np.exp(np.log(4))
+y6 = np.log(-1)
 
+print("log[0]=",y1)
+print("log[1]=",y2)
+print("log[e]=",y3)
+print("log[exp(3)]=",y4)
+print("exp[log(4)]=",y5)
+print("log[-1]=",y6)
 """
